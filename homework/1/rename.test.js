@@ -1,6 +1,7 @@
 const acorn = require('acorn');
 const traverse = require('../../common/traverse')
 const rename = require('./rename')
+const test = require('ava')
 
 // TODO: 无视代码格式标准化
 function toStandard(code) {
@@ -15,7 +16,7 @@ function toStandard(code) {
   return target
 }
 
-test('测试重命名变量', () => {
+test('测试重命名变量', t => {
   const sourceCode = `
 function foo() {
 	foo: while(true) {
@@ -40,5 +41,5 @@ function bar() {
 
   const result = rename(sourceCode, 'foo', 'bar');
 
-  expect(toStandard(result)).toStrictEqual(toStandard(targetCode));
+  t.deepEqual(toStandard(result), toStandard(targetCode))
 })

@@ -10,7 +10,7 @@ function evaluate(node, env) {
 }
 
 function customerEval(code, env = {}) {
-  const node = acorn.parseExpressionAt(code, 0, {
+  const node = acorn.parse(code, 0, {
     ecmaVersion: 6
   })
   return evaluate(node, env)
